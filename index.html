@@ -1,140 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Pallavi Kumari – Frontend Developer portfolio showcasing projects in JavaScript, Web Development and AI."/>
-<meta name="keywords" content="Pallavi Kumari, web developer, portfolio, javascript projects, frontend developer, CSE student"/>
-<meta name="author" content="Pallavi Kumari"/>
-<title>Pallavi Kumari – Webfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Webfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <style>
-body{margin:0;background:#0a0f1c;color:#e2e8f0;font-family:'Inter',sans-serif;}
-h1,h2,h3{font-family:'Poppins',sans-serif;}
-.container{width:90%;max-width:1100px;margin:auto;}
-nav{background:#0f172a;padding:12px 0;position:sticky;top:0;}
-nav a{color:#cbd5f5;margin-right:15px;text-decoration:none;}
-.hero{text-align:center;padding:60px 10px;}
-.hero img{width:140px;height:140px;border-radius:50%;border:4px solid #7c3aed;object-fit:cover;}
-.btn{background:#7c3aed;padding:8px 14px;border-radius:20px;color:white;text-decoration:none;margin:3px;display:inline-block;}
-.card{background:#0f172a;padding:15px;border-radius:12px;margin-bottom:12px;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-@media(max-width:700px){.grid{grid-template-columns:1fr;}}
-input,textarea{width:100%;padding:8px;margin:6px 0;background:#0a0f1c;color:white;border:1px solid #1f2937;}
-button{background:#7c3aed;color:white;padding:8px 14px;border:none;border-radius:20px;}
-
-#wa{
- position:fixed;bottom:20px;right:20px;
- background:#25d366;color:white;
- padding:12px;border-radius:50%;
- font-size:20px;text-decoration:none;
+:root{
+  --bg:#0c0e14;
+  --card:#141720;
+  --accent:#9d7cff;
+  --text:#e9e9ff;
+  --soft:#b8b8d4;
 }
 
-.icon{margin-right:6px;}
-footer{text-align:center;padding:20px;color:#94a3b8;}
+.light{
+  --bg:#ececf6;
+  --card:#ffffff;
+  --text:#0f0f1a;
+  --soft:#3a3a55;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--text);overflow-x:hidden;transition:.4s;}
+
+#canvas3d{position:fixed;top:0;left:0;z-index:-1;opacity:.55;}
+
+nav{
+  position:fixed;top:0;width:100%;
+  display:flex;justify-content:space-between;
+  padding:22px 8%;z-index:999;
+  backdrop-filter:blur(14px);
+}
+
+.logo{font-weight:700;letter-spacing:1px;}
+
+.nav-right{display:flex;gap:18px;align-items:center;}
+
+.theme{
+  padding:8px 14px;border:1px solid var(--accent);
+  border-radius:30px;cursor:pointer;font-size:13px;
+}
+
+.hero{
+  height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:0 6%;
+}
+
+.hero h1{
+  font-size:clamp(3rem,6vw,5rem);
+  background:linear-gradient(45deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  color:var(--soft);
+  margin-top:12px;max-width:600px;
+  line-height:1.6;
+}
+
+.btn{
+  margin-top:26px;
+  padding:13px 28px;
+  background:linear-gradient(45deg,var(--accent),#c4a7ff);
+  border:none;border-radius:40px;
+  color:#000;font-weight:600;
+  cursor:pointer;
+}
+
+.section{
+  padding:140px 10%;
+  max-width:1100px;
+  margin:auto;
+}
+
+.box{
+  background:var(--card);
+  padding:26px;border-radius:22px;
+  margin-top:16px;line-height:1.7;
+}
+
+.features{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;margin-top:20px;
+}
+
+.tag{
+  border:1px solid var(--accent);
+  padding:10px 14px;border-radius:30px;
+  font-size:13px;text-align:center;
+}
+
+form input,form textarea{
+  width:100%;padding:12px;margin:8px 0;
+  border:1px solid #333;border-radius:12px;
+  background:#0e0f17;color:white;
+}
+
+@media(max-width:768px){
+  .features{grid-template-columns:1fr;}
+}
 </style>
 </head>
-<body onload="AOS.init(); type();">
+<body>
+
+<canvas id="canvas3d"></canvas>
 
 <nav>
-<div class="container">
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#experience">Experience</a>
-<a href="#projects">Projects</a>
-<a href="#certificates">Certificates</a>
-<a href="#contact">Contact</a>
-</div>
+  <div class="logo">Webfolio</div>
+  <div class="nav-right">
+    <div class="theme" onclick="toggleTheme()">Theme</div>
+  </div>
 </nav>
 
-<section class="hero" data-aos="fade-up">
-  <img src="profile.jpg"/>
-  <h1>Pallavi Kumari</h1>
-  <p id="typing"></p>
-  <a class="btn" href="Pallavi_Resume.pdf">Download Resume</a>
+<section class="hero">
+  <h1 class="title">Webfolio</h1>
+  <p class="sub">
+    A premium personal space inspired by Flux aesthetics — smooth motion, minimal layout and modern identity focused design.
+  </p>
+  <button class="btn">Download Resume</button>
 </section>
 
-<section id="about" class="container" data-aos="fade-right">
-<h2>About Me</h2>
-<div class="card">I am a Computer Science student passionate about creating beautiful websites, learning backend, databases and AI to build real world solutions.</div>
+<section class="section">
+  <h2>About Me</h2>
+  <div class="box">
+    I am pallavi kumari-Welcome to WebFolio.  we are a collective of engineering talent bridging the gap between vision and reality. We build high-performance, scalable, and secure digital solutions that drive business growth.
+  </div>
+
+  <div class="features">
+    <div class="tag">Creative Development</div>
+    <div class="tag">Operating Systems Engineering</div>
+    <div class="tag">cyber security</div>
+    <div class="tag">Full Stack Learning</div>
+  </div>
 </section>
 
-<section id="skills" class="container" data-aos="fade-left">
-<h2>Skills</h2>
-<div class="grid">
-<div class="card">💻 HTML & CSS</div>
-<div class="card">🟨 JavaScript</div>
-<div class="card">🐍 Python</div>
-<div class="card">🗄 MySQL</div>
-<div class="card">⚙ OOP & DSA</div>
-<div class="card">⚛ React Basics</div>
-</div>
-</section>
-
-<section id="experience" class="container" data-aos="zoom-in">
-<h2>Experience</h2>
-<div class="card">
-<h3>Web Developer Intern – HexSoftware</h3>
-<ul><li>Built responsive UI components</li><li>Worked on real style projects</li><li>Improved layouts & interaction</li></ul>
-</div>
-<div class="card">
-<h3>Android Intern – India Edu Program</h3>
-<ul><li>Created Android UI screens</li><li>Debugging & testing</li></ul>
-</div>
-</section>
-
-<section id="projects" class="container" data-aos="fade-up">
-<h2>Projects</h2>
-<div class="grid">
-<div class="card"><h3>Pallavi AI</h3><a class="btn" href="https://pallavi-ai-project.vercel.app/">Live</a><a class="btn" href="https://github.com/pallavi081/Pallavi_AI_Project">GitHub</a></div>
-<div class="card"><h3>Snake Race</h3><a class="btn" href="https://snake-race-pallavi.vercel.app/">Live</a><a class="btn" href="https://github.com/pallavi081/snake_race">GitHub</a></div>
-<div class="card"><h3>LK Auto</h3><a class="btn" href="https://pallavi081.github.io/LK-AUTO/">Live</a><a class="btn" href="https://github.com/pallavi081/LK-AUTO">GitHub</a></div>
-<div class="card"><h3>Gym Website</h3><a class="btn" href="https://pallavi081.github.io/gym-website/">Live</a><a class="btn" href="https://github.com/pallavi081/gym-website">GitHub</a></div>
-</div>
-</section>
-
-<section id="certificates" class="container" data-aos="flip-up">
-<h2>Certificates</h2>
-<div class="grid">
-<div class="card">Web Development – Internship Certificate</div>
-<div class="card">Android Development – Google Edu</div>
-<div class="card">Python Basics</div>
-<div class="card">DSA Fundamentals</div>
-</div>
-</section>
-
-<section id="contact" class="container" data-aos="fade-up">
+<section class="section">
 <h2>Contact</h2>
-<div class="card">
-<form>
-<input placeholder="Your Name"/>
-<input placeholder="Email"/>
-<textarea placeholder="Message"></textarea>
-<button>Send Message</button>
+<div class="box">
+<form onsubmit="sendMail(event)">
+<input placeholder="Your name" required/>
+<input placeholder="Email" required/>
+<textarea placeholder="Message" required></textarea>
+<button class="btn">Send Message</button>
 </form>
-<p>Email: shripallavi@gmail.com</p>
-<p><a href="https://www.linkedin.com/in/pallavi-kumari-03b1112b0/">LinkedIn</a> | <a href="https://github.com/pallavi081">GitHub</a></p>
 </div>
 </section>
-
-<a id="wa" href="https://wa.me/91">💬</a>
-
-<footer>© 2026 Pallavi Kumari</footer>
 
 <script>
-const words=["Frontend Developer","CSE Student","Backend & AI Learner"];
-let i=0,j=0,t="";
-function type(){
- if(j<words[i].length){t+=words[i][j];j++;}
- else{setTimeout(()=>{t="";j=0;i=(i+1)%words.length;},1200);}
- document.getElementById('typing').innerText=t;
- setTimeout(type,120);
-}
-</script>
+// 3D SPHERE
+const canvas=document.getElementById('canvas3d');
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
 
+const geo=new THREE.IcosahedronGeometry(2.1,1);
+const mat=new THREE.MeshStandardMaterial({color:'#9d7cff',wireframe:true});
+const sphere=new THREE.Mesh(geo,mat);
+scene.add(sphere);
+
+const light=new THREE.PointLight(0xffffff,1.2);
+light.position.set(6,4,6);
+scene.add(light);
+
+camera.position.z=5;
+function animate(){
+ requestAnimationFrame(animate);
+ sphere.rotation.x+=0.002;
+ sphere.rotation.y+=0.004;
+ renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener('resize',()=>{
+ renderer.setSize(window.innerWidth,window.innerHeight);
+ camera.aspect=window.innerWidth/window.innerHeight;
+ camera.updateProjectionMatrix();
+});
+
+function toggleTheme(){document.body.classList.toggle('light');}
+
+function sendMail(e){e.preventDefault();alert('Connect EmailJS to activate mailing');}
+
+// GSAP
+gsap.from('.title',{y:70,opacity:0});
+gsap.from('.sub',{y:40,opacity:0,delay:.2});
+
+</script>
 </body>
 </html>
