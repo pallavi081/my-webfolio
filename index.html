@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pallavi Kumari | Webfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#4f46e5;
+  --secondary:#7c3aed;
+  --bg:#ffffff;
+  --text:#0f172a;
+  --card:#f8fafc;
+}
+[data-theme="dark"]{
+  --bg:#0f172a;
+  --text:#f8fafc;
+  --card:#111827;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+h1,h2,h3{font-family:'Poppins',sans-serif;}
+a{text-decoration:none;color:inherit;}
+.container{width:90%;max-width:1100px;margin:auto;}
+
+/* Navbar */
+nav{position:fixed;width:100%;background:var(--card);padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05);z-index:100;}
+.nav-flex{display:flex;justify-content:space-between;align-items:center;}
+.nav-links a{margin-left:20px;font-weight:500;}
+
+/* Hero */
+#hero{padding:120px 0 60px;text-align:center;}
+.gradient{background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;color:transparent;}
+.btn{display:inline-block;margin:10px;padding:10px 22px;border-radius:30px;background:linear-gradient(90deg,var(--primary),var(--secondary));color:#fff;}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.card{background:var(--card);padding:18px;border-radius:14px;transition:.3s;}
+.card:hover{transform:translateY(-6px);}
+
+section{padding:60px 0;}
+
+.toggle{cursor:pointer;padding:6px 12px;border:1px solid var(--primary);border-radius:20px;}
+
+footer{text-align:center;padding:30px 0;opacity:.8;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-flex">
+    <strong>Pallavi</strong>
+    <div>
+      <span class="toggle" onclick="toggleTheme()">Dark/Light</span>
+      <span class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <h1 class="gradient">Hi, I'm Pallavi Kumari</h1>
+    <p>Frontend Developer | CSE Student | Backend & AI Learner</p>
+    <a class="btn" href="#projects">View Projects</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2>About Me</h2>
+    <p>I am a Computer Science Engineering student passionate about building responsive web applications using HTML, CSS and JavaScript. I am exploring backend and AI to create meaningful real‑world solutions.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2>Skills</h2>
+    <div class="grid">
+      <div class="card">HTML & CSS</div>
+      <div class="card">JavaScript</div>
+      <div class="card">Python</div>
+      <div class="card">MySQL</div>
+      <div class="card">OOP & DSA</div>
+      <div class="card">React Basics</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Pallavi AI</h3>
+        <p>JavaScript virtual assistant with interactive UI.</p>
+      </div>
+      <div class="card">
+        <h3>LK Auto Website</h3>
+        <p>Automobile service landing page.</p>
+      </div>
+      <div class="card">
+        <h3>EduScheduler</h3>
+        <p>Education scheduling platform UI.</p>
+      </div>
+      <div class="card">
+        <h3>Snake Game</h3>
+        <p>Classic game built with JS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+    <p>Email: shripallavi@gmail.com</p>
+    <p>GitHub: pallavi081</p>
+  </div>
+</section>
+
+<footer>© 2025 Pallavi Kumari</footer>
+
+<script>
+function toggleTheme(){
+  const t=document.body.getAttribute('data-theme');
+  document.body.setAttribute('data-theme',t==='dark'?'light':'dark');
+}
+</script>
+
+</body>
+</html>
